@@ -182,6 +182,20 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+# -------------------------
+# First-load welcome — shown only when no interaction has happened yet
+# -------------------------
+
+if not st.session_state.chat_history and not st.session_state.mood_history:
+    st.info(
+        "👋 Welcome to ElderEase AI!\n\n"
+        "You can use this space in two simple ways:\n\n"
+        "• **Record your mood** — use the dropdown below to quickly note how you are feeling today.\n\n"
+        "• **Talk to ElderEase** — write a few words about how you are feeling and ElderEase will "
+        "listen and respond with care.\n\n"
+        "There is no right or wrong way to use ElderEase. Take your time. 💙"
+    )
+
 st.divider()
 
 
