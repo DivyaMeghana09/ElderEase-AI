@@ -106,6 +106,21 @@ The algorithm uses a simple wellbeing scoring system (Happy=5, Okay=4, Tired=3, 
 
 ---
 
+## 🤔 Why Rule-Based AI?
+
+ElderEase AI intentionally uses deterministic, rule-based logic rather than a large language model or external AI API. This is a deliberate design decision, not a limitation:
+
+- **Reliability** — Every response is predictable and reviewable. There are no hallucinations, no unexpected outputs, and no model drift.
+- **Transparency** — The logic is fully readable in source code. Anyone can verify exactly what the application will say for any given input.
+- **Safety** — The distress-detection path is guaranteed to fire for all 17 configured phrases, every single time. An LLM could miss them or respond inconsistently.
+- **Privacy** — No user message is ever sent to a third-party API. An older adult's emotional disclosure stays entirely on their own device.
+- **Dependency-free** — No API key, no paid service, no network request required. The application runs fully offline.
+- **Appropriate scope** — For a gentle daily check-in companion, consistent and compassionate templated responses serve the user better than non-deterministic generation.
+
+This design is validated by 100 automated tests with 100% engine coverage — a level of confidence that is difficult to achieve with generative AI outputs.
+
+---
+
 ## 📂 Project Structure
 
 ```text
@@ -132,7 +147,7 @@ ElderEase-AI/
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/your-username/ElderEase-AI.git
+git clone https://github.com/DivyaMeghana09/ElderEase-AI.git
 cd ElderEase-AI
 
 # 2. Create a virtual environment
@@ -196,32 +211,29 @@ python -m pytest tests/ -v --cov=mood_engine --cov=activity_engine --cov-report=
 
 ## 🤖 IBM Bob 2.0 — Developer Workflow Contribution
 
-This project was developed using **IBM Bob 2.0** as an active development partner across every phase:
+This project was developed using **IBM Bob 2.0** as an active development partner across every phase of the PLAN → BUILD → TEST → DEBUG → IMPROVE → DOCUMENT lifecycle. Below is a precise account of which Bob capability was used at each step and what it produced.
 
-### PLAN
-Bob read all five original project files — including `PRODUCT_VISION.md` — and produced a ranked, evidence-based assessment identifying bugs, gaps, and high-impact improvements before any code was changed.
+### PLAN — Document Understanding + Code Analysis
+Bob's **Agent mode** read all five project files in a single context window — including `PRODUCT_VISION.md`, `app.py`, `mood_engine.py`, `activity_engine.py`, and `requirements.txt`. Using **document understanding**, Bob cross-referenced the product vision against the implementation and produced a ranked, evidence-based assessment identifying two confirmed bugs, three design gaps, and ten prioritised improvements — all before any code was changed.
 
-### BUILD (Baseline Tests)
-Bob wrote **66 tests** from scratch, covering functional behaviour, edge cases, and safety-critical inputs — all against the original unmodified code. The test suite discovered **1 real bug** (a silent parameter discard in `generate_support_response`) before any production code was touched.
+### BUILD — Baseline Tests via Agent Mode
+Bob's **Agent mode** wrote **66 tests** from scratch across two test files, covering functional behaviour, edge cases, case sensitivity, and safety-critical inputs — all against the original unmodified code. Bob used **code analysis** to understand each function's actual behaviour (including its implicit contract) before writing assertions. This is the phase where the `user_message` bug was first captured as a failing assertion.
 
-### TEST
-Running the test suite immediately exposed three findings:
-- **Bug confirmed:** `user_message` accepted but discarded
-- **Safety gap documented:** no distress detection existed
-- **Data integrity validated:** all activity lists confirmed correct
+### TEST — Test Execution + Bug Discovery
+Bob **ran the full test suite** and reported the single failure with its exact assertion error, confirmed that the `user_message` parameter was accepted but discarded at `mood_engine.py:60`, and identified two further gaps (no safety escalation path, no activity deduplication) as documented-but-passing tests. Test execution was used as the primary verification mechanism throughout — not manual review.
 
-### DEBUG
-Bob diagnosed the root cause of the test failure at `mood_engine.py:60`, implemented the fix, and updated the relevant tests. The previously-failing test now passes.
+### DEBUG — Root Cause Analysis + Coordinated Multi-File Fix
+Bob performed **root cause analysis** on the failing test, traced it to the dictionary-only lookup in `generate_support_response`, designed a template-based fix that incorporated the user's own message, and implemented a **coordinated multi-file change** across `mood_engine.py` and the corresponding test class in a single Agent task — updating the fix, the passing companion test, and the fallback tests simultaneously.
 
-### IMPROVE
-Bob implemented:
-1. Safety escalation (`detect_safety_concern()`, `SAFETY_RESPONSE` with Tele-MANAS 14416)
-2. A full safety review expanding distress keywords from 13 → 17 and correcting the helpline from UK (116 123) → India (14416 / 1800-89-14416)
-3. UI accessibility overhaul — large text, mood-coloured cards, plain language, accessible disclaimer
-4. Within-session mood trend awareness (`get_mood_trend()`) with 18 dedicated tests
+### IMPROVE — Multi-File Implementation with Continuous Regression Testing
+Bob's **Agent mode** executed four distinct improvement tasks, each followed by a full test-suite run to confirm no regression:
+1. **Safety escalation** — designed and implemented `detect_safety_concern()` and `SAFETY_RESPONSE`, wired the `elif` branch into `app.py`, added 10 new safety tests
+2. **Safety review** — audited the 13 distress phrases, identified 4 gaps, corrected the helpline from UK Samaritans (116 123) to India Tele-MANAS (14416), added 4 regression-guard tests
+3. **Accessibility overhaul** — rewrote CSS and all UI copy in `app.py` in a single coherent Agent pass informed by the `PRODUCT_VISION.md` constraints read earlier
+4. **Mood trend** — designed `get_mood_trend()`, implemented it in `mood_engine.py`, integrated it into `app.py`, and wrote 18 dedicated tests — all in one Agent task
 
-### DOCUMENT
-Bob generated this README, `CHANGELOG.md`, and `docs/ARCHITECTURE.md` with accurate metrics drawn directly from the test suite output.
+### DOCUMENT — Repository-Wide Documentation Generation
+Bob used its full repository context (all source files, all test results, the product vision) to generate this README, `CHANGELOG.md`, and `docs/ARCHITECTURE.md` with metrics drawn directly from live test-suite output — not estimates. The ARCHITECTURE document includes accurate ASCII data-flow diagrams derived from reading the actual code, not assumed structure.
 
 ### Measurable impact
 
