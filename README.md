@@ -251,6 +251,49 @@ Bob used its full repository context (all source files, all test results, the pr
 
 ---
 
+## IBM Bob 2.0 Development Evidence
+
+IBM Bob 2.0 was used throughout the ElderEase AI development lifecycle:
+
+**PLAN → BUILD → TEST → DEBUG → IMPROVE → DOCUMENT → VERIFY**
+
+Bob was used to assess the existing project, identify engineering and product gaps, implement targeted improvements, review safety and accessibility, improve mood continuity, and verify the final implementation.
+
+### Bob-assisted development highlights
+
+#### 1. Initial Project Assessment
+
+Bob analyzed the existing application and identified gaps in testing, personalization, safety, accessibility, and developer workflow.
+
+![Initial Bob Assessment](P1-01 Executive Assessment and Architecture.png)
+
+#### 2. 360° Product & Hackathon Review
+
+Bob reviewed ElderEase AI across product experience, AI quality, safety, engineering quality, business value, originality, demo potential, and hackathon readiness.
+
+![Bob 360 Assessment](![Uploading P1 B - Bob 360 Assessment.png…]()
+Day2_P1_360_Assessment.png)
+
+#### 3. Bob-Assisted Product Improvement
+
+Bob helped implement and verify mood trend awareness, allowing ElderEase to recognize whether recent check-ins are moving in a more positive or difficult direction.
+
+![Mood Trend Improvement](docs/bob-evidence/Day2_P3_Mood_Trend.png)
+
+#### 4. Final Verification
+
+The final Bob-assisted verification confirmed:
+
+**100 tests · 100 passed · 0 failed · 0 errors**
+
+with **100% coverage for `mood_engine.py` and `activity_engine.py`**.
+
+![Final Bob Verification](docs/bob-evidence/FINAL_Bob_Verification_100_Tests.png)
+
+[View all Bob development evidence](docs/bob-evidence/)
+
+
+
 ## 🎬 Demo Flow
 
 1. **Open the app** — large title, readable subtitle, clean light background
