@@ -265,21 +265,15 @@ Bob was used to assess the existing project, identify engineering and product ga
 
 Bob analyzed the existing application and identified gaps in testing, personalization, safety, accessibility, and developer workflow.
 
-![Initial Bob Assessment](P1-01 Executive Assessment and Architecture (1).png)
+![Initial Bob Assessment](P1_Initial_Bob_Assessment.png)
 
-#### 2. 360° Product & Hackathon Review
-
-Bob reviewed ElderEase AI across product experience, AI quality, safety, engineering quality, business value, originality, demo potential, and hackathon readiness.
-
-![Bob 360 Assessment](P2 Bob 360 Assessment.png)
-
-#### 3. Bob-Assisted Product Improvement
+#### 2. Bob-Assisted Product Improvement
 
 Bob helped implement and verify mood trend awareness, allowing ElderEase to recognize whether recent check-ins are moving in a more positive or difficult direction.
 
 ![Mood Trend Improvement](P3_Improvement2_Mood_Trend_100_100.png)
 
-#### 4. Final Verification
+#### 3. Final Verification
 
 The final Bob-assisted verification confirmed:
 
